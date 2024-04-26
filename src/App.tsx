@@ -12,16 +12,10 @@ import { useEffect, useState } from 'react'
 import Hanzi from './components/hanzi/row'
 import { isChineseChar } from './utils/char'
 
-enum Mode {
-  Preview,
-  Edit,
-}
-
 function App() {
   const [input, setInput] = useState<string>('')
   const [hanzi, setHanzi] = useState<string>('')
   const [showAlertNotChinese, setShowAlertNotChinese] = useState(false)
-  const [mode, setMode] = useState<Mode>(Mode.Preview)
   useEffect(() => {
     if (hanzi.split('').some((char) => !isChineseChar(char))) {
       setShowAlertNotChinese(true)
@@ -45,8 +39,6 @@ function App() {
             className='w-full'
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onFocus={() => setMode(Mode.Edit)}
-            onBlur={() => setMode(Mode.Preview)}
           />
 
           <IconButton
